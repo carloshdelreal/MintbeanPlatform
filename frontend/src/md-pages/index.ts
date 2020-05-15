@@ -43,13 +43,13 @@ const createPath = (_root: string, _filename: string) => {
   return root + filename;
 };
 
-function markdownPageRoutes(root: string) {
+function markdownPageRoutes (root: string) {
   const routes = files.keys().map((filename) => ({
     path: createPath(root, filename),
     props: {
-      markdown: files(filename),
+      markdown: files(filename)
     },
-    component: MbMarkdown,
+    component: MbMarkdown
   }));
 
   console.log(routes);

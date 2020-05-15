@@ -50,13 +50,13 @@ import { ApiService } from '../services/apiService';
 export default {
   name: 'Scores',
   props: ['email'],
-  data() {
+  data () {
     return {
       scores: [],
-      errorMessage: null,
+      errorMessage: null
     };
   },
-  created() {
+  created () {
     const apiService = new ApiService();
 
     apiService
@@ -73,6 +73,6 @@ export default {
           this.errorMessage = 'Failed to fetch results.';
         }
       });
-  },
+  }
 };
 </script>
