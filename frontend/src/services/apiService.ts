@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 export class ApiService {
-  get(url: string) {
+  get (url: string) {
     return axios.get(url);
   }
 }
-
