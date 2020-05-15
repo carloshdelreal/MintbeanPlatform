@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = (sequelize, DataTypes) => {
   const Developer = sequelize.define('Developer', {
     firstName: DataTypes.STRING,
@@ -7,12 +7,12 @@ module.exports = (sequelize, DataTypes) => {
     profiles: DataTypes.JSON,
     contactMethods: DataTypes.JSON,
     technologies: DataTypes.JSON
-  }, {});
+  }, {})
   Developer.associate = function (models) {
     // associations can be defined here
-    const { Attendance, Developer, Experience } = models;
-    Developer.hasMany(Attendance);
-    Developer.belongsToMany(Experience, { through: 'Attendance' });
-  };
-  return Developer;
-};
+    const { Attendance, Developer, Experience } = models
+    Developer.hasMany(Attendance)
+    Developer.belongsToMany(Experience, { through: 'Attendance' })
+  }
+  return Developer
+}

@@ -1,4 +1,4 @@
-require('dotenv').config(); // this is important!
+require('dotenv').config() // this is important!
 
 const defaults = {
   username: 'mintbean',
@@ -6,7 +6,7 @@ const defaults = {
   host: '127.0.0.1',
   dialect: 'postgres',
   operatorsAliases: false
-};
+}
 
 module.exports = {
   development: Object.assign({}, defaults, {
@@ -18,4 +18,4 @@ module.exports = {
   production: Object.assign({}, defaults, {
     database: 'mintbean_production'
   })
-};
+}

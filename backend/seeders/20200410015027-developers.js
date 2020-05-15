@@ -1,10 +1,10 @@
-'use strict';
-const developerFactory = require('../factory/developer.factory');
+'use strict'
+const developerFactory = require('../factory/developer.factory')
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    const developers = developerFactory(10);
-    return queryInterface.bulkInsert('Developers', developers);
+    const developers = developerFactory(10)
+    return queryInterface.bulkInsert('Developers', developers)
     /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
@@ -26,4 +26,4 @@ module.exports = {
       return queryInterface.bulkDelete('People', null, {});
     */
   }
-};
+}
