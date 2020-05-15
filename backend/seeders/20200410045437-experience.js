@@ -1,10 +1,10 @@
-'use strict'
-const experienceFactory = require('../factory/experience.factory')
+'use strict';
+const experienceFactory = require('../factory/experience.factory');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    const experiences = experienceFactory(10)
-    return queryInterface.bulkInsert('Experiences', experiences)
+    const experiences = experienceFactory(10);
+    return queryInterface.bulkInsert('Experiences', experiences);
     /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
@@ -26,4 +26,4 @@ module.exports = {
       return queryInterface.bulkDelete('People', null, {});
     */
   }
-}
+};

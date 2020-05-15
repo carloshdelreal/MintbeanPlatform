@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Developers', {
@@ -38,9 +38,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.JSON
       }
-    })
+    });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Developers')
+    return queryInterface.dropTable('Developers');
   }
-}
+};

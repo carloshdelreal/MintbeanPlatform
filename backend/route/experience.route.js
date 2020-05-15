@@ -1,9 +1,9 @@
-const Boom = require('@hapi/boom')
-const Joi = require('@hapi/joi')
-const { getExperience } = require('../service/experience.service')
-const { Experience } = require('../models')
-const { id: idValidator } = require('../validators/value.validators')
-const { create: createExperienceValidator, update: updateExperienceValidator } = require('../validators/experience.validators')
+const Boom = require('@hapi/boom');
+const Joi = require('@hapi/joi');
+const { getExperience } = require('../service/experience.service');
+const { Experience } = require('../models');
+const { id: idValidator } = require('../validators/value.validators');
+const { create: createExperienceValidator, update: updateExperienceValidator } = require('../validators/experience.validators');
 
 module.exports = (server) => {
   // Get all experiences
@@ -11,9 +11,9 @@ module.exports = (server) => {
     method: 'GET',
     path: '/api/v1/experience',
     handler: (request, h) => {
-      return Experience.findAll()
+      return Experience.findAll();
     }
-  })
+  });
 
   // get experience by id
   server.route({
@@ -27,9 +27,9 @@ module.exports = (server) => {
       }
     },
     handler: (request, h) => {
-      return getExperience(request.params.experienceId)
+      return getExperience(request.params.experienceId);
     }
-  })
+  });
 
   // get developers for experience
   server.route({
@@ -44,9 +44,9 @@ module.exports = (server) => {
     },
     handler: (request, h) => {
       return getExperience(request.params.experienceId)
-        .then(experience => experience.getDevelopers())
+        .then(experience => experience.getDevelopers());
     }
-  })
+  });
 
   // create experience
   server.route({
@@ -58,9 +58,9 @@ module.exports = (server) => {
       }
     },
     handler: (request, h) => {
-      return Experience.create(request.payload)
+      return Experience.create(request.payload);
     }
-  })
+  });
 
   // update experience
   server.route({
@@ -76,9 +76,9 @@ module.exports = (server) => {
     },
     handler: (request, h) => {
       return getExperience(request.params.experienceId)
-        .then(experience => experience.update(request.payload))
+        .then(experience => experience.update(request.payload));
     }
-  })
+  });
 
   // delete experience
   server.route({
@@ -94,14 +94,14 @@ module.exports = (server) => {
     handler: (request, h) => {
       return getExperience(request.params.experienceId)
         .then(async (experience) => {
-          const developers = await experience.getDevelopers()
+          const developers = await experience.getDevelopers();
           if (developers.length !== 0) {
-            return Boom.forbidden('That experience already has registered developers and cannot be deleted.')
+            return Boom.forbidden('That experience already has registered developers and cannot be deleted.');
           } else {
-            return experience.destroy()
+            return experience.destroy();
           }
         })
-        .then(() => ({ success: true }))
+        .then(() => ({ success: true }));
     }
-  })
-}
+  });
+};

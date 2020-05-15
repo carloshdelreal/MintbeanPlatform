@@ -1,7 +1,7 @@
-const Boom = require('@hapi/boom')
-const Joi = require('@hapi/joi')
-const { email: emailValidator } = require('../validators/value.validators')
-const { getSubmissionsByEmail } = require('../data')
+const Boom = require('@hapi/boom');
+const Joi = require('@hapi/joi');
+const { email: emailValidator } = require('../validators/value.validators');
+const { getSubmissionsByEmail } = require('../data');
 
 const TAG_MAP = {
   aesthetics: {
@@ -23,19 +23,19 @@ const TAG_MAP = {
     GREAT_QUESTIONS_ON_CODE_REVIEW: 'The participant asked some really great questions on their code reviews! They scored some extra points because of that.',
     GREAT_ANSWERS_TO_CODE_REVIEW_COMMENTS: 'The participant addressed comments on theirown Pull Request with a lot of useful information!'
   }
-}
+};
 
 const decorate = (scoreName, scoreObject) => {
-  const originalComments = scoreObject[scoreName].comments
+  const originalComments = scoreObject[scoreName].comments;
 
   const comments = Object.entries(TAG_MAP[scoreName])
     .filter(([key]) => scoreObject.tags.indexOf(key) >= 0)
-    .map(([key, val]) => val)
+    .map(([key, val]) => val);
 
-  originalComments && comments.unshift(originalComments)
+  originalComments && comments.unshift(originalComments);
 
-  scoreObject[scoreName].comments = comments.join('\n\n')
-}
+  scoreObject[scoreName].comments = comments.join('\n\n');
+};
 
 module.exports = (server) => {
   // Get all experiences
@@ -50,15 +50,15 @@ module.exports = (server) => {
       }
     },
     handler: (request, h) => {
-      const scores = getSubmissionsByEmail(request.params.developerEmail)
+      const scores = getSubmissionsByEmail(request.params.developerEmail);
       scores.forEach(score => {
-        decorate('aesthetics', score)
-        decorate('codeQuality', score)
-        decorate('codeReview', score)
-      })
+        decorate('aesthetics', score);
+        decorate('codeQuality', score);
+        decorate('codeReview', score);
+      });
 
       if (scores.length === 0) {
-        return Boom.notFound('Could not find submissions for that email')
+        return Boom.notFound('Could not find submissions for that email');
       } else {
         // aesthetics: {
         //   score: aestheticsNumeric,
@@ -75,8 +75,8 @@ module.exports = (server) => {
         // };
         // });
 
-        return scores
+        return scores;
       }
     }
-  })
-}
+  });
+};
