@@ -1,28 +1,28 @@
-const Boom = require('@hapi/boom');
-const Joi = require('@hapi/joi');
-const { getExperience } = require('../service/experience.service');
-const { Developer, Attendance } = require('../models');
-const developerValidator = require('../validators/developer.validator');
-const { update: validateAttendanceUpdate } = require('../validators/attendance.validators');
-const { email: emailValidator, id: idValidator } = require('../validators/value.validators');
+const Boom = require('@hapi/boom')
+const Joi = require('@hapi/joi')
+const { getExperience } = require('../service/experience.service')
+const { Developer, Attendance } = require('../models')
+const developerValidator = require('../validators/developer.validator')
+const { update: validateAttendanceUpdate } = require('../validators/attendance.validators')
+const { email: emailValidator, id: idValidator } = require('../validators/value.validators')
 
 const getUser = (email, shouldExplode = true) => Developer.findOne({ where: { email } })
   .then((developer) => {
     if (!developer && shouldExplode) {
-      throw Boom.notFound('Could not find developer with that email.');
+      throw Boom.notFound('Could not find developer with that email.')
     } else {
-      return developer;
+      return developer
     }
-  });
+  })
 
 const getAttendance = (DeveloperId, ExperienceId, shouldExplode = true) => Attendance.findOne({ where: { DeveloperId, ExperienceId } })
   .then((attendance) => {
     if (!attendance && shouldExplode) {
-      throw Boom.notFound('Could not find Attendance with that DeveloperId and ExperienceId');
+      throw Boom.notFound('Could not find Attendance with that DeveloperId and ExperienceId')
     } else {
-      return attendance;
+      return attendance
     }
-  });
+  })
 
 // Get all developers
 module.exports = (server) => {
@@ -30,9 +30,9 @@ module.exports = (server) => {
     method: 'GET',
     path: '/api/v1/developer',
     handler: (request, h) => {
-      return Developer.findAll();
+      return Developer.findAll()
     }
-  });
+  })
 
   server.route({
     method: 'POST',
@@ -46,13 +46,13 @@ module.exports = (server) => {
       return getUser(request.payload.email, false)
         .then((developer) => {
           if (!developer) {
-            return Developer.create(request.payload);
+            return Developer.create(request.payload)
           } else {
-            throw Boom.badRequest('Developer with that email already exists.');
+            throw Boom.badRequest('Developer with that email already exists.')
           }
-        });
+        })
     }
-  });
+  })
 
   server.route({
     method: 'GET',
@@ -65,9 +65,9 @@ module.exports = (server) => {
       }
     },
     handler: (request, h) => {
-      return getUser(request.params.email);
+      return getUser(request.params.email)
     }
-  });
+  })
 
   server.route({
     method: 'GET',
@@ -80,9 +80,9 @@ module.exports = (server) => {
       }
     },
     handler: (request, h) => {
-      return getUser(request.params.email).then(developer => developer.getExperiences());
+      return getUser(request.params.email).then(developer => developer.getExperiences())
     }
-  });
+  })
 
   // Create association
   server.route({
@@ -97,29 +97,29 @@ module.exports = (server) => {
       }
     },
     handler: async (request, h) => {
-      const { email, experienceId } = request.params;
+      const { email, experienceId } = request.params
 
       try {
-        const developer = await getUser(email);
-        const experience = await getExperience(experienceId);
+        const developer = await getUser(email)
+        const experience = await getExperience(experienceId)
         const attendance = await Attendance.findOne({
           where: {
             DeveloperId: developer.id,
             ExperienceId: experience.id
           }
-        });
+        })
         if (!attendance) {
           return Attendance.create({
             DeveloperId: developer.id,
             ExperienceId: experience.id
-          });
+          })
         }
-        return attendance;
+        return attendance
       } catch (e) {
-        return e;
+        return e
       }
     }
-  });
+  })
 
   // Remove association
   server.route({
@@ -134,33 +134,33 @@ module.exports = (server) => {
       }
     },
     handler: async (request, h) => {
-      const { email, experienceId } = request.params;
+      const { email, experienceId } = request.params
       try {
-        const developer = await getUser(email);
+        const developer = await getUser(email)
         const attendance = await Attendance.findOne({
           where: {
             DeveloperId: developer.id,
             ExperienceId: experienceId
           }
-        });
+        })
 
         if (!attendance) {
-          throw Boom.notFound('This developer is not associated with that experience.');
+          throw Boom.notFound('This developer is not associated with that experience.')
         } else {
           await Attendance.destroy({
             where: {
               DeveloperId: developer.id,
               ExperienceId: experienceId
             }
-          });
+          })
 
-          return { success: true };
+          return { success: true }
         }
       } catch (e) {
-        return e;
+        return e
       }
     }
-  });
+  })
 
   // Edit association
   server.route({
@@ -178,7 +178,7 @@ module.exports = (server) => {
     handler: (request, h) => {
       return getUser(request.params.email)
         .then(developer => getAttendance(developer.id, request.params.experienceId))
-        .then(attendance => attendance.update(request.payload));
+        .then(attendance => attendance.update(request.payload))
     }
-  });
-};
+  })
+}

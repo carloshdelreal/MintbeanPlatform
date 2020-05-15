@@ -1,5 +1,5 @@
-const faker = require('faker');
-const factory = require('./factory');
+const faker = require('faker')
+const factory = require('./factory')
 
 module.exports = factory({
   title: () => faker.lorem.sentence(),
@@ -8,4 +8,4 @@ module.exports = factory({
   experienceDate: () => new Date(),
   createdAt: () => new Date(),
   updatedAt: () => new Date()
-});
+})

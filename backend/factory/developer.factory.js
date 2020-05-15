@@ -1,5 +1,5 @@
-const faker = require('faker');
-const factory = require('./factory');
+const faker = require('faker')
+const factory = require('./factory')
 
 module.exports = factory({
   firstName: () => faker.name.firstName(),
@@ -10,4 +10,4 @@ module.exports = factory({
   technologies: () => JSON.stringify(['React', 'Node', 'JavaScript']),
   createdAt: () => new Date(),
   updatedAt: () => new Date()
-});
+})
