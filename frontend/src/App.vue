@@ -17,9 +17,9 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-@import './styles/colors';
-@import './styles/dimensions';
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import HelloWorld from './components/HelloWorld.vue';
 
 .accent-bar {
   position: fixed;
@@ -42,9 +42,14 @@
   text-align: center;
 }
 
-.version {
+<style lang="scss">
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: $lightest;
+  color: #2c3e50;
+  margin-top: 60px;
 }
 </style>
 
