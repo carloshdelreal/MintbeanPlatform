@@ -11,8 +11,8 @@ export default {
   },
   computed: {
     rel () {
-      return `noopener noreferrer ${this.nofollow || ''}`
+      return `noopener noreferrer ${this.nofollow || ''}`;
     }
   }
-}
+};
 </script>

@@ -28,7 +28,7 @@ module.exports = {
       .loader('./markdown-routes-loader.js')
       .end()
       .use('ejs-loader')
-      .loader('ejs-loader')
+      .loader('ejs-loader');
     // .tap(options => {
     //   console.log("OPTIONS",options);
     //   return {
@@ -48,4 +48,4 @@ module.exports = {
       }
     }
   }
-}
+};
