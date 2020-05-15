@@ -34,7 +34,6 @@ const decorate = (scoreName, scoreObject) => {
 
   originalComments && comments.unshift(originalComments)
 
-  console.log('DECORATE', scoreName, comments)
   scoreObject[scoreName].comments = comments.join('\n\n')
 }
 
@@ -57,8 +56,6 @@ module.exports = (server) => {
         decorate('codeQuality', score)
         decorate('codeReview', score)
       })
-
-      console.log('AFTER DECORATE', scores)
 
       if (scores.length === 0) {
         return Boom.notFound('Could not find submissions for that email')
