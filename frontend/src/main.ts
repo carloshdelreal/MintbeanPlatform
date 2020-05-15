@@ -6,7 +6,7 @@ import mbA from './components/mb-a.vue';
 import mbMarkdown from './components/mb-markdown.vue';
 
 import './styles/app.scss';
-import './styles/guidebook.scss';
+import './styles/guidebook.scss'
 
 Vue.config.productionTip = false;
 
