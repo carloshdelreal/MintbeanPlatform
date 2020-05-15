@@ -7,12 +7,12 @@
 export default {
   props: {
     href: String,
-    nofollow: Boolean
+    nofollow: Boolean,
   },
   computed: {
-    rel: function() {
-      return `noopener noreferrer ${this.nofollow || ""}`;
-    }
-  }
+    rel() {
+      return `noopener noreferrer ${this.nofollow || ''}`;
+    },
+  },
 };
 </script>

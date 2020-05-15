@@ -17,17 +17,17 @@
 
 <script>
 export default {
-  name: "Scores",
+  name: 'Scores',
   methods: {
-    handleSearch: function(e) {
+    handleSearch(e) {
       e.preventDefault();
-      this.$router.push('/scores/' + this.email);
-    }
+      this.$router.push(`/scores/${this.email}`);
+    },
   },
   data() {
     return {
-      email: ""
+      email: '',
     };
-  }
+  },
 };
 </script>

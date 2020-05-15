@@ -1,23 +1,24 @@
 /**
  * This file autogenerates routes from the ./markdown folder
- * 
+ *
  * It does NOT autogenerate the index, so if you add any pages,
  * please make sure you add those pages to `./markdown/index.md`
- * 
+ *
  */
 
-import MbMarkdown from "../components/mb-markdown.vue";
+import MbMarkdown from '../components/mb-markdown.vue';
+
 const files = require.context('./', true, /\.md$/);
 
 const ensureLeadingSlash = (_string: string) => {
   let string = _string;
 
   if (string[0] !== '/') {
-    string = '/' + string;
+    string = `/${string}`;
   }
 
   return string;
-}
+};
 
 const removeTrailingSlashes = (string: string) => string.replace(/\/+$/, '');
 const removeLeadingDot = (string: string) => string.replace(/^\./, '');
@@ -34,30 +35,25 @@ const createPath = (_root: string, _filename: string) => {
   filename = removeLeadingDot(filename);
 
   // remove trailing .md declarations
-  filename = filename.replace(/\.md$/, '')
+  filename = filename.replace(/\.md$/, '');
 
   // anything named index.md stays as a root route for that folder
-  filename = filename.replace(/index$/, '')
+  filename = filename.replace(/index$/, '');
 
   return root + filename;
-}
-
+};
 
 function markdownPageRoutes(root: string) {
-  const routes = files
-    .keys()
-    .map(filename => ({
-      path: createPath(root, filename),
-      props: {
-        markdown: files(filename)
-      },
-      component: MbMarkdown
-    }));
+  const routes = files.keys().map((filename) => ({
+    path: createPath(root, filename),
+    props: {
+      markdown: files(filename),
+    },
+    component: MbMarkdown,
+  }));
 
   console.log(routes);
   return routes;
 }
 
-export {
-  markdownPageRoutes
-}
+export { markdownPageRoutes };

@@ -1,78 +1,29 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/scores">Legacy Scores</router-link> | 
-      <router-link to="/guidebook">Guidebook</router-link> |
-      <router-link to="/for-educators">For Educators</router-link>
-    </div>
-    <div class="content-container">
-      <router-view />
-      <div class="version" :v-if="frontendVersion && backendVersion">
-        <p>Frontend: {{frontendVersion}} | Backend: {{backendVersion}}</p>
-      </div>
-    </div>
-    <div class="accent-bar top"/>
-    <div class="accent-bar bottom"/>
+    <img alt="Vue logo" src="./assets/logo.png">
+    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
   </div>
 </template>
 
-<style lang="scss" scoped>
-@import './styles/colors';
-@import './styles/dimensions';
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import HelloWorld from './components/HelloWorld.vue';
 
-.accent-bar {
-  position: fixed;
-  left: 0;
-  right: 0;
-  height: vstep(1);
-  background-color: $least-minty;
-  margin-bottom: 0;
-  padding-bottom: 0;
+@Component({
+  components: {
+    HelloWorld,
+  },
+})
+export default class App extends Vue {}
+</script>
 
-  &.top {
-    top: 0;
-  }
-  &.bottom {
-    bottom: 0;
-    background-color: $least-blue;
-  }
-}
-
-.version {
+<style lang="scss">
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: $lightest;
+  color: #2c3e50;
+  margin-top: 60px;
 }
 </style>
-
-<script>
-import { VersionService } from "./services/versionService";
-import { version } from '../package.json'
-
-export default {
-  name: "App",
-  data() {
-    return {
-      version: null,
-      frontendVersion: null,
-      backendVersion: null,
-      errorMessage: null
-    };
-  },
-  created() {
-    const versionService = new VersionService();
-
-    versionService.frontendVersion()
-      .then(version => this.frontendVersion = version)
-      .catch(err => {
-        this.frontendVersion = "Unknown";
-      });
-
-    versionService.backendVersion()
-      .then(version => this.backendVersion = version)
-      .catch(err => {
-        this.backendVersion = "Unknown";
-      });
-  }
-};
-</script>

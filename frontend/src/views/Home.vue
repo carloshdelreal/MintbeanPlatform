@@ -4,7 +4,7 @@
     .hello
       h1 Mintbean
       h3 A Software Developer Talent Incubator
-      p We work to accelerate the careers, skillsets, and professional networks of software developers globally. 
+      p We work to accelerate the careers, skillsets, and professional networks of software developers globally.
       h2 Essential Links
       ul.essential-links
         li
@@ -37,7 +37,7 @@
     list-style-type: none;
   }
   li {
-    @include respond-to('small') {
+    @include respond-to("small") {
       display: inline-block;
       width: 100%;
       margin: vstep(1) hstep(0);
@@ -51,6 +51,6 @@
 <script>
 // @ is an alias to /src
 export default {
-  name: "Home"
+  name: 'Home',
 };
 </script>
