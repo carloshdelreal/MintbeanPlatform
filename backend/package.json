@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "lint": "eslint --ext .js,.vue .",
     "test": "jest",
     "sql": "sequelize-cli",
     "pristine": "NODE_ENV=development server/scripts/pristine.sh"
@@ -33,7 +33,12 @@
     "xlsx": "^0.15.6"
   },
   "devDependencies": {
-    "eslint": "^6.1.0",
+    "eslint": "^7.0.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
     "husky": "^4.0.0",
     "lint-staged": "^10.0.0",
     "nodemon": "^1.18.9",
