@@ -17,10 +17,9 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from './components/HelloWorld.vue'
-
+<style lang="scss" scoped>
+@import './styles/colors';
+@import './styles/dimensions';
 .accent-bar {
   position: fixed;
   left: 0;
@@ -29,7 +28,6 @@ import HelloWorld from './components/HelloWorld.vue'
   background-color: $least-minty;
   margin-bottom: 0;
   padding-bottom: 0;
-
   &.top {
     top: 0;
   }
@@ -41,22 +39,15 @@ import HelloWorld from './components/HelloWorld.vue'
 .center {
   text-align: center;
 }
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.version {
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: $lightest;
 }
 </style>
 
 <script>
 import { VersionService } from "./services/versionService";
 import { version } from '../package.json'
-
 export default {
   name: "App",
   computed: {
@@ -74,13 +65,11 @@ export default {
   },
   created() {
     const versionService = new VersionService();
-
     versionService.frontendVersion()
       .then(version => this.frontendVersion = version)
       .catch(err => {
         this.frontendVersion = "Unknown";
       });
-
     versionService.backendVersion()
       .then(version => this.backendVersion = version)
       .catch(err => {
