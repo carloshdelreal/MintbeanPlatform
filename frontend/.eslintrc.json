@@ -18,7 +18,8 @@
     },
     "plugins": [
         "vue",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "pug"
     ],
     "rules": {
         "semi": ["error", "always"]

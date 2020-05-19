@@ -1,6 +1,7 @@
 // vue.config.js
 module.exports = {
   // options...
+  lintOnSave: false,
   devServer: {
     proxy: {
       '^/api/v1': {
@@ -10,6 +11,10 @@ module.exports = {
         pathRewrite: { '^/api/v1': '/api/v1' },
         logLevel: 'debug'
       }
+    },
+    overlay: {
+      warnings: true,
+      errors: true
     }
   },
   chainWebpack: (config) => {
