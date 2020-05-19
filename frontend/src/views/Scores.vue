@@ -19,14 +19,14 @@
 export default {
   name: 'Scores',
   methods: {
-    handleSearch (e) {
+    handleSearch(e) {
       e.preventDefault();
       this.$router.push(`/scores/${this.email}`);
     }
   },
-  data () {
+  data() {
     return {
-      email: ''
+      email: '',
     };
   }
 };

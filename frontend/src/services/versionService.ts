@@ -1,5 +1,5 @@
 import { ApiService } from './apiService';
-const packageJson = require('../../package.json');
+const packageJson = require('../../package.json')
 
 export class VersionService {
   frontendVersion (): Promise<string> {
